@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './login.css';
-import logo from '../images/logoNave.svg';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import logo from '../../images/logoNave.svg';
+import { Formik, Field, Form } from 'formik';
+import api from '../../services/Api';
+import StoreContext from '../../components/Store/Context';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
-  const login = () => {
-    console.log('Kemps');
+  const { setToken } = useContext(StoreContext);
+  const history = useHistory();
+
+  const login = (values, actions) => {
+    api
+      .post('users/login', {
+        email: values.emaillogin,
+        password: values.password,
+      })
+      .then((response) => {
+        if (response.data.token) {
+          setToken(response.data.token);
+          history.push('/home');
+          actions.resetForm();
+        }
+        console.log('Usuario');
+      })
+      .catch((errors) => {
+        if (errors) {
+          alert('Usuario ou senha inválidas');
+        }
+        actions.resetForm();
+      });
   };
 
   return (
     <div className="container">
       <div className="login__box">
         <div className="logo">
-          <img src={logo} alt="Nave Logo" className="login-form-header-img" />
+          <img src={logo} alt="Nave Logo" />
           <h1>nave.rs</h1>
         </div>
         <div className="form">

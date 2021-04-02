@@ -1,15 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Login from './components/Login';
+import Routes from './Routes';
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={Login} />
-      </Switch>
-    </Router>
-  );
+  return <Routes />;
 }
 
 export default App;

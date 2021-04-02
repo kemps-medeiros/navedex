@@ -12,6 +12,7 @@ import StoreContext from './components/Store/Context';
 
 import Login from './pages/login/Login';
 import Home from './pages/home/Home';
+import New from './pages/new/New';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { token } = useContext(StoreContext);
@@ -30,6 +31,7 @@ const Routes = () => (
       <Switch>
         <Route path="/" exact component={Login} />;
         <PrivateRoute path="/home" exact component={Home} />;
+        <PrivateRoute path="/new" exact component={New} />;
       </Switch>
     </StoreProvider>
   </HashRouter>

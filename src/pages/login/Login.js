@@ -3,6 +3,7 @@ import './login.css';
 import logo from '../../images/logoNave.svg';
 import { Formik, Field, Form } from 'formik';
 import api from '../../services/Api';
+import { userLogin } from '../../services/Auth';
 import StoreContext from '../../components/Store/Context';
 import { useHistory } from 'react-router-dom';
 
@@ -19,10 +20,10 @@ const Login = () => {
       .then((response) => {
         if (response.data.token) {
           setToken(response.data.token);
+          userLogin(response.data.token);
           history.push('/home');
           actions.resetForm();
         }
-        console.log('Usuario');
       })
       .catch((errors) => {
         if (errors) {

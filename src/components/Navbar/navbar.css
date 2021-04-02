@@ -7,7 +7,7 @@
   background: #e5e5e5;
 }
 
-.row {
+.row__nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -15,7 +15,7 @@
   width: 95%;
 }
 
-.logo {
+.logo__nav {
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -42,6 +42,7 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 20px;
+  color: inherit;
 }
 
 .logout a:visited {

@@ -32,6 +32,29 @@ const Home = () => {
             Adicionar Naver
           </Link>
         </div>
+        <div className="navers">
+          {navers.map((naver) => {
+            return (
+              <div className="card">
+                <div>
+                  <img
+                    src={`/images/avatars/${naver.url}`}
+                    alt={naver.name}
+                    className="home-naver-profile-li-a-img"
+                  />
+                </div>
+                <li>
+                  <ul>{naver.name}</ul>
+                  <ul>{naver.job_role}</ul>
+                </li>
+                <div className="handles">
+                  <p>Trash</p>
+                  <p>Edit</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </section>
     </div>
   );

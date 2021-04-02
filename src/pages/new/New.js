@@ -4,14 +4,13 @@ import Navbar from '../../components/Navbar/Navbar';
 import { FaChevronLeft } from 'react-icons/fa';
 import './new.css';
 import { Formik, Field, Form } from 'formik';
-import { getToken } from '../../services/Auth';
 import api from '../../services/Api';
 
 const New = () => {
   const token = localStorage.getItem('useToken');
 
-  const addNewNaver = async (values, actions) => {
-    await api
+  const addNewNaver = (values, actions) => {
+    api
       .post(
         'navers',
         {

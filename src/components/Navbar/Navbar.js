@@ -8,6 +8,7 @@ const Navbar = () => {
 
   const logout = () => {
     setToken(null);
+    localStorage.setItem('userToken', null);
   };
 
   return (

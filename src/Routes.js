@@ -26,7 +26,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 const Routes = () => (
-  <HashRouter>
+  <BrowserRouter>
     <StoreProvider>
       <Switch>
         <Route path="/" exact component={Login} />;
@@ -34,7 +34,7 @@ const Routes = () => (
         <PrivateRoute path="/new" exact component={New} />;
       </Switch>
     </StoreProvider>
-  </HashRouter>
+  </BrowserRouter>
 );
 
 export default Routes;

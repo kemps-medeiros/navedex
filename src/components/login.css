@@ -1,0 +1,82 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e5e5;
+}
+
+.login__box {
+  border: 1px solid #212121;
+  width: 448px;
+  height: 408px;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.logo h1 {
+  font-size: 40px;
+  margin-left: 10px;
+}
+
+.logo img {
+  height: 60px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formik__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+}
+
+.formik__form label {
+  width: 100%;
+  align-items: center;
+}
+
+.email {
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto 0 auto;
+  width: 384px;
+}
+
+.password {
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto 0 auto;
+  width: 384px;
+}
+
+.input {
+  margin: auto;
+  width: 384px;
+  height: 40px;
+}
+
+.btn__login {
+  margin: 50px auto 0 auto;
+  width: 384px;
+  height: 40px;
+  background: #212121;
+  color: #fff;
+  cursor: pointer;
+  border-radius: none;
+}

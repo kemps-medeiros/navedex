@@ -35,6 +35,47 @@
   display: flex;
   flex-direction: row;
   width: 95%;
-  border: 1px solid black;
   margin-top: 30px;
+}
+
+.row__cards {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.navers__data h4 {
+  font-weight: 500;
+}
+
+.card {
+  width: 25%;
+  margin-right: 15px;
+  display: block;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 100%;
+}
+
+.navers__data h3 {
+  margin-top: 15px;
+}
+
+.navers__data h4 {
+  margin-top: 15px;
+}
+
+.handles {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.icons {
+  margin-right: 20px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }

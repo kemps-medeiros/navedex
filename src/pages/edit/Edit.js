@@ -1,19 +1,47 @@
-import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import { FaChevronLeft } from 'react-icons/fa';
 import './new.css';
 import { Formik, Field, Form } from 'formik';
 import api from '../../services/Api';
 
-const New = () => {
+const Edit = () => {
+  // const [id, setId] = useState({});
+  const [naverData, setNaverData] = useState({});
+  const objectId = useParams();
+  let id = objectId.id;
   const token = localStorage.getItem('useToken');
-  const history = useHistory();
 
-  const addNewNaver = (values, actions) => {
+  async function getNaverData() {
+    try {
+      id = objectId.id;
+      await api
+        .get(`navers/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setNaverData(response.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    console.log(id);
+    if (id) {
+      getNaverData();
+    }
+  }, [id]);
+
+  const editNaver = (values, actions) => {
+    let id = objectId.id;
     api
-      .post(
-        'navers',
+      .put(
+        `navers/${id}`,
         {
           job_role: values.title,
           admission_date: values.companyTime,
@@ -31,7 +59,7 @@ const New = () => {
       .then((response) => {
         console.log(response);
 
-        history.push('/home');
+        // history.push('/home');
       })
       .catch((errors) => {
         console.log(errors);
@@ -48,17 +76,17 @@ const New = () => {
             <Link to="/home">
               <FaChevronLeft />
             </Link>
-            <h2> Adicionar Naver </h2>
+            <h2> Editar Naver </h2>
           </div>
 
           <Formik
             className="formik__new__naver"
-            onSubmit={addNewNaver}
+            onSubmit={editNaver}
             initialValues={{
               nameNaver: '',
               age: '',
               projects: '',
-              title: '',
+              title: naverData.job_role,
               companyTime: '',
               path: '',
             }}
@@ -70,9 +98,11 @@ const New = () => {
                     <Field
                       type="text"
                       autoFocus={true}
+                      id="nameNaver"
                       name="nameNaver"
                       placeholder="Nome"
                       className="input__add"
+                      // value={naverData.name}
                     />
                   </div>
                   <div className="fields">
@@ -82,6 +112,7 @@ const New = () => {
                       name="age"
                       placeholder="Idade"
                       className="input__add"
+                      // value={naverData.birthdate}
                     />
                   </div>
                   <div className="fields">
@@ -91,6 +122,7 @@ const New = () => {
                       name="projects"
                       placeholder="Projetos que participou"
                       className="input__add"
+                      // value={naverData.project}
                     />
                   </div>
                 </div>
@@ -102,6 +134,7 @@ const New = () => {
                       name="title"
                       placeholder="Cargo"
                       className="input__add"
+                      // value={naverData.job_role}
                     />
                   </div>
                   <div className="fields">
@@ -111,6 +144,7 @@ const New = () => {
                       name="companyTime"
                       placeholder="Tempo de Empresa"
                       className="input__add"
+                      // value={naverData.admission_date}
                     />
                   </div>
                   <div className="fields">
@@ -120,6 +154,7 @@ const New = () => {
                       name="path"
                       placeholder="URL da foto do Naver"
                       className="input__add"
+                      // value={naverData.url}
                     />
                   </div>
 
@@ -139,5 +174,4 @@ const New = () => {
     </div>
   );
 };
-
-export default New;
+export default Edit;

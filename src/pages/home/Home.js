@@ -3,14 +3,15 @@ import Navbar from '../../components/Navbar/Navbar';
 import './home.css';
 import api from '../../services/Api';
 import { Link } from 'react-router-dom';
+import { FaTrash, FaPen } from 'react-icons/fa';
 
 const Home = () => {
   const [navers, setNavers] = useState([]);
 
   const token = localStorage.getItem('useToken');
 
-  useEffect(async () => {
-    await api
+  async function fetchData() {
+    const getData = await api
       .get('navers', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -20,7 +21,28 @@ const Home = () => {
         setNavers(response.data);
         console.log(response.data);
       });
+  }
+
+  useEffect(() => {
+    fetchData();
   }, [token]);
+
+  async function deleteNaver(id) {
+    try {
+      // console.log(id);
+      await api.delete(`navers/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      fetchData();
+
+      // setNavers(navers.filter((naver) => naver.id !== id));
+    } catch (err) {
+      console.log(err);
+      alert('Erro ao deletar o Naver, tente novamente');
+    }
+  }
 
   return (
     <div>
@@ -33,27 +55,32 @@ const Home = () => {
           </Link>
         </div>
         <div className="navers">
-          {navers.map((naver) => {
-            return (
-              <div className="card">
-                <div>
+          <div className="row__cards">
+            {navers.map(({ id, url, name, job_role }) => {
+              return (
+                <div key={id} className="card" id={id}>
                   <img
-                    src={`/images/avatars/${naver.url}`}
-                    alt={naver.name}
-                    className="home-naver-profile-li-a-img"
+                    src={`/images/avatars/${url}`}
+                    alt={name}
+                    className="avatar"
                   />
+
+                  <div className="navers__data">
+                    <h3>{name}</h3>
+                    <h4>{job_role}</h4>
+                  </div>
+                  <div className="handles">
+                    <a className="icons" onClick={() => deleteNaver(id)}>
+                      <FaTrash id={id} />
+                    </a>
+                    <Link to={`edit/${id}`} className="icons">
+                      <FaPen />
+                    </Link>
+                  </div>
                 </div>
-                <li>
-                  <ul>{naver.name}</ul>
-                  <ul>{naver.job_role}</ul>
-                </li>
-                <div className="handles">
-                  <p>Trash</p>
-                  <p>Edit</p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
     </div>

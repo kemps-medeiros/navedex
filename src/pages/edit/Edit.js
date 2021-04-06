@@ -9,6 +9,12 @@ import api from '../../services/Api';
 const Edit = () => {
   // const [id, setId] = useState({});
   const [naverData, setNaverData] = useState({});
+  const [name, setName] = useState('');
+  const [project, setProject] = useState('');
+  const [jobRole, setJobRole] = useState('');
+  const [admissionDate, setAdmissionDate] = useState('');
+  const [url, setUrl] = useState('');
+  const [birthdate, setBirthdate] = useState('');
   const objectId = useParams();
   let id = objectId.id;
   const token = localStorage.getItem('useToken');
@@ -23,7 +29,16 @@ const Edit = () => {
           },
         })
         .then((response) => {
-          setNaverData(response.data);
+          if (response) {
+            setNaverData(response.data);
+            setName(response.data.name);
+            setProject(response.data.project);
+            setJobRole(response.data.job_role);
+            setBirthdate(response.data.birthdate);
+            setUrl(response.data.url);
+            setAdmissionDate(response.data.admission_date);
+            console.log(name);
+          }
         });
     } catch (err) {
       console.log(err);
@@ -35,20 +50,21 @@ const Edit = () => {
     if (id) {
       getNaverData();
     }
-  }, [id]);
+  }, []);
 
   const editNaver = (values, actions) => {
     let id = objectId.id;
+    console.log(id);
     api
       .put(
         `navers/${id}`,
         {
-          job_role: values.title,
-          admission_date: values.companyTime,
-          birthdate: values.age,
-          project: values.projects,
-          name: values.nameNaver,
-          url: values.path,
+          job_role: jobRole,
+          admission_date: admissionDate,
+          birthdate: birthdate,
+          project: project,
+          name: name,
+          url: url,
         },
         {
           headers: {
@@ -82,79 +98,77 @@ const Edit = () => {
           <Formik
             className="formik__new__naver"
             onSubmit={editNaver}
-            initialValues={{
-              nameNaver: '',
-              age: '',
-              projects: '',
-              title: naverData.job_role,
-              companyTime: '',
-              path: '',
-            }}
             render={({ values, errors, touched, isValid, setFieldValue }) => (
               <Form className="form__add">
                 <div className="col">
                   <div className="fields">
                     <label>Nome</label>
-                    <Field
+                    <input
                       type="text"
                       autoFocus={true}
                       id="nameNaver"
                       name="nameNaver"
                       placeholder="Nome"
                       className="input__add"
-                      // value={naverData.name}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                   <div className="fields">
                     <label>Idade</label>
-                    <Field
+                    <input
                       type="text"
                       name="age"
                       placeholder="Idade"
                       className="input__add"
-                      // value={naverData.birthdate}
+                      value={birthdate}
+                      onChange={(e) => setBirthdate(e.target.value)}
                     />
                   </div>
                   <div className="fields">
                     <label>Projetos que participou</label>
-                    <Field
+                    <input
                       type="text"
                       name="projects"
                       placeholder="Projetos que participou"
                       className="input__add"
-                      // value={naverData.project}
+                      value={project}
+                      onChange={(e) => setProject(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="col">
                   <div className="fields">
                     <label>Cargo</label>
-                    <Field
+                    <input
                       type="text"
                       name="title"
                       placeholder="Cargo"
                       className="input__add"
-                      // value={naverData.job_role}
+                      value={jobRole}
+                      onChange={(e) => setJobRole(e.target.value)}
                     />
                   </div>
                   <div className="fields">
                     <label>Tempo de Empresa</label>
-                    <Field
+                    <input
                       type="text"
                       name="companyTime"
                       placeholder="Tempo de Empresa"
                       className="input__add"
-                      // value={naverData.admission_date}
+                      value={admissionDate}
+                      onChange={(e) => setAdmissionDate(e.target.value)}
                     />
                   </div>
                   <div className="fields">
                     <label>URL da foto do Naver</label>
-                    <Field
+                    <input
                       type="text"
                       name="path"
                       placeholder="URL da foto do Naver"
                       className="input__add"
-                      // value={naverData.url}
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
                     />
                   </div>
 

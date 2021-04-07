@@ -4,9 +4,11 @@ import './home.css';
 import api from '../../services/Api';
 import { Link } from 'react-router-dom';
 import { FaTrash, FaPen } from 'react-icons/fa';
+import ModalNaver from '../../components/Modals/modalNaver/ModalNaver';
 
 const Home = () => {
   const [navers, setNavers] = useState([]);
+  const [isModalNaverOpen, setIsModalNaverOpen] = useState(false);
 
   const token = localStorage.getItem('useToken');
 
@@ -44,6 +46,14 @@ const Home = () => {
     }
   }
 
+  const handleImg = () => {
+    setIsModalNaverOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsModalNaverOpen(false);
+  };
+
   return (
     <div>
       <Navbar />
@@ -63,6 +73,7 @@ const Home = () => {
                     src={`/images/avatars/${url}`}
                     alt={name}
                     className="avatar"
+                    onClick={handleImg}
                   />
 
                   <div className="navers__data">
@@ -83,6 +94,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      {isModalNaverOpen && <ModalNaver onClose={handleClose} />}
     </div>
   );
 };

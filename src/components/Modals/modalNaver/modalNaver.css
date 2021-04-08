@@ -1,0 +1,75 @@
+.container__modal_naver {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  width: 100%;
+  height: 100%;
+}
+
+.col1_modal {
+  width: 50%;
+  height: 100%;
+}
+
+.img_modal {
+  height: 100%;
+}
+
+.col2_modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  height: 100%;
+  padding: 7px;
+}
+
+.btn_close_modalNaver {
+  font-weight: 900;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.line1_modalNaver {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.jobRole {
+  font-size: 35px;
+  font-weight: 400;
+}
+
+.h1__modalNaver {
+  font-size: 45px;
+}
+
+.title_modalNaver {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.title_modalNaver p {
+  font-size: 25px;
+}
+
+.p_modalNaver {
+  font-size: 25px;
+}
+
+.icons__modalNaver {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  height: 150px;
+}
+
+.icon_modalNaver {
+  margin-bottom: 0;
+  font-size: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  margin-right: 30px;
+}

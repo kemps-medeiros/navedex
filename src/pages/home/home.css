@@ -57,10 +57,12 @@
 
 .avatar {
   width: 100%;
+  cursor: pointer;
 }
 
 .navers__data h3 {
   margin-top: 15px;
+  cursor: pointer;
 }
 
 .navers__data h4 {

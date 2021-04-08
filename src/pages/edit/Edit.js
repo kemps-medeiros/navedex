@@ -3,7 +3,6 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import { FaChevronLeft } from 'react-icons/fa';
 import './new.css';
-import { Formik, Field, Form } from 'formik';
 import api from '../../services/Api';
 
 const Edit = () => {

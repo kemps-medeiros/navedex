@@ -8,6 +8,8 @@ import ModalNaver from '../../components/Modals/modalNaver/ModalNaver';
 
 const Home = () => {
   const [navers, setNavers] = useState([]);
+  const [selectedNaver, setSelectedNaver] = useState([]);
+
   const [isModalNaverOpen, setIsModalNaverOpen] = useState(false);
 
   const token = localStorage.getItem('useToken');
@@ -37,6 +39,7 @@ const Home = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       fetchData();
 
       // setNavers(navers.filter((naver) => naver.id !== id));
@@ -46,12 +49,30 @@ const Home = () => {
     }
   }
 
-  const handleImg = () => {
-    setIsModalNaverOpen(true);
-  };
+  async function handleImg(id) {
+    try {
+      console.log(id);
+      await api
+        .get(`navers/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setSelectedNaver(response.data);
+        });
+      console.log(selectedNaver);
+      fetchData();
+      setIsModalNaverOpen(true);
+    } catch (err) {
+      console.log(err);
+      alert('Erro ao carregar o Naver, tente novamente');
+    }
+  }
 
   const handleClose = () => {
     setIsModalNaverOpen(false);
+    fetchData();
   };
 
   return (
@@ -73,11 +94,11 @@ const Home = () => {
                     src={`/images/avatars/${url}`}
                     alt={name}
                     className="avatar"
-                    onClick={handleImg}
+                    onClick={() => handleImg(id)}
                   />
 
                   <div className="navers__data">
-                    <h3>{name}</h3>
+                    <h3 onClick={() => handleImg(id)}>{name}</h3>
                     <h4>{job_role}</h4>
                   </div>
                   <div className="handles">
@@ -94,7 +115,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {isModalNaverOpen && <ModalNaver onClose={handleClose} />}
+      {isModalNaverOpen && (
+        <ModalNaver onClose={handleClose} selectedNaver={selectedNaver} />
+      )}
     </div>
   );
 };

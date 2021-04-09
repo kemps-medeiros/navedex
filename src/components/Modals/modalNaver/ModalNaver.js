@@ -4,6 +4,7 @@ import './modalNaver.css';
 import { FaTrash, FaPen } from 'react-icons/fa';
 import { Link, useHistory } from 'react-router-dom';
 import api from '../../../services/Api';
+import ModalDelete from '../modalDelete/ModalDelete';
 
 const customStyles = {
   content: {
@@ -23,8 +24,15 @@ Modal.setAppElement('#root');
 
 const ModalNaver = ({ onClose, selectedNaver }) => {
   const [editUser, setEditUser] = useState(selectedNaver);
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
+
+  const [isOpenModalNaver, setIsOpenModalNaver] = useState(true);
   const token = localStorage.getItem('useToken');
   const history = useHistory();
+
+  useEffect(() => {
+    console.log('alterou Estado');
+  }, [isModalDeleteOpen]);
 
   useEffect(() => {
     console.log(selectedNaver);
@@ -45,18 +53,22 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
     onClose(null);
   };
 
-  async function fetchData() {
-    const getData = await api
-      .get('navers', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        // setNavers(response.data);
-        console.log(response.data);
-      });
+  async function handleDeleteModal() {
+    setIsModalDeleteOpen(true);
   }
+
+  // async function fetchData() {
+  //   const getData = await api
+  //     .get('navers', {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       // setNavers(response.data);
+  //       console.log(response.data);
+  //     });
+  // }
 
   async function deleteNaver(id) {
     try {
@@ -75,7 +87,7 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
 
   return (
     <div>
-      <Modal isOpen={true} style={customStyles}>
+      <Modal isOpen={isOpenModalNaver} style={customStyles}>
         <div className="container__modal_naver">
           <div className="col1_modal">
             <img
@@ -103,7 +115,8 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
             <div className="icons__modalNaver">
               <a
                 className="icon_modalNaver"
-                onClick={() => deleteNaver(editUser.id)}
+                // onClick={() => deleteNaver(editUser.id)}
+                onClick={handleDeleteModal}
               >
                 <FaTrash id={editUser.id} />
               </a>
@@ -114,6 +127,7 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
           </div>
         </div>
       </Modal>
+      {isModalDeleteOpen && <ModalDelete id={editUser.id} />}
     </div>
   );
 };

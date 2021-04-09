@@ -76,7 +76,7 @@ const New = () => {
                     />
                   </div>
                   <div className="fields">
-                    <label>Idade</label>
+                    <label>Data de Nascimento</label>
                     <Field
                       type="text"
                       name="age"
@@ -105,7 +105,7 @@ const New = () => {
                     />
                   </div>
                   <div className="fields">
-                    <label>Tempo de Empresa</label>
+                    <label>Data de Admissão</label>
                     <Field
                       type="text"
                       name="companyTime"

@@ -112,7 +112,7 @@ const Edit = () => {
                 />
               </div>
               <div className="fields">
-                <label>Idade</label>
+                <label>Data de Nascimento</label>
                 <input
                   type="text"
                   name="age"
@@ -147,7 +147,7 @@ const Edit = () => {
                 />
               </div>
               <div className="fields">
-                <label>Tempo de Empresa</label>
+                <label>Data de Admissão</label>
                 <input
                   type="text"
                   name="companyTime"

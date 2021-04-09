@@ -25,14 +25,13 @@ Modal.setAppElement('#root');
 const ModalNaver = ({ onClose, selectedNaver }) => {
   const [editUser, setEditUser] = useState(selectedNaver);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
-
   const [isOpenModalNaver, setIsOpenModalNaver] = useState(true);
-  const token = localStorage.getItem('useToken');
-  const history = useHistory();
+  // let birth = editUser.birthdate;
+  // let currentDate = new Date();
+  // let currentDateYear = currentDate.getFullYear();
+  // let age = currentDateYear - birth.getFullYear();
 
-  useEffect(() => {
-    console.log('alterou Estado');
-  }, [isModalDeleteOpen]);
+  const token = localStorage.getItem('useToken');
 
   useEffect(() => {
     console.log(selectedNaver);
@@ -41,6 +40,18 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   });
+
+  function getAge(date) {
+    if (date) {
+      const birthDate = new Date(date);
+      let yearBorn = birthDate.getFullYear();
+      const currentDate = new Date();
+      let yearNow = currentDate.getFullYear();
+      let age = yearNow - yearBorn;
+
+      return age;
+    }
+  }
 
   const handleKeyDown = (event) => {
     // console.log(event);
@@ -57,33 +68,32 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
     setIsModalDeleteOpen(true);
   }
 
-  // async function fetchData() {
-  //   const getData = await api
-  //     .get('navers', {
+  function getJobTime(date) {
+    if (date) {
+      const admissionDate = new Date(date);
+      let yearAdmission = admissionDate.getFullYear();
+      const currentDate = new Date();
+      let yearNow = currentDate.getFullYear();
+      let jobTime = yearNow - yearAdmission;
+
+      return jobTime;
+    }
+  }
+
+  // async function deleteNaver(id) {
+  //   try {
+  //     console.log(id);
+  //     await api.delete(`navers/${id}`, {
   //       headers: {
   //         Authorization: `Bearer ${token}`,
   //       },
-  //     })
-  //     .then((response) => {
-  //       // setNavers(response.data);
-  //       console.log(response.data);
   //     });
+  //     onClose(null);
+  //   } catch (err) {
+  //     console.log(err);
+  //     alert('Erro ao deletar o Naver, tente novamente');
+  //   }
   // }
-
-  async function deleteNaver(id) {
-    try {
-      console.log(id);
-      await api.delete(`navers/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      onClose(null);
-    } catch (err) {
-      console.log(err);
-      alert('Erro ao deletar o Naver, tente novamente');
-    }
-  }
 
   return (
     <div>
@@ -107,9 +117,11 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
             </div>
             <p className="jobRole">{editUser.job_role}</p>
             <p className="title_modalNaver">Idade</p>
-            <p className="p_modalNaver">{editUser.birthdate}</p>
+            <p className="p_modalNaver">{getAge(editUser.birthdate)} Anos</p>
             <p className="title_modalNaver">Tempo de Empresa</p>
-            <p className="p_modalNaver">{editUser.admission_date}</p>
+            <p className="p_modalNaver">
+              {getJobTime(editUser.admission_date)} Anos
+            </p>
             <p className="title_modalNaver">Projetos que participou</p>
             <p className="p_modalNaver">{editUser.project}</p>
             <div className="icons__modalNaver">

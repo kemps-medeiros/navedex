@@ -3,14 +3,14 @@ import { Link, useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import { FaChevronLeft } from 'react-icons/fa';
 import './new.css';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import api from '../../services/Api';
 import ModalCreate from '../../components/Modals/modalCreate/ModalCreate';
+import schemaNewNaver from '../../schemaNewNaver';
 
 const New = () => {
   const [isOpenModalCreate, setIsOpenModalCreate] = useState(false);
   const token = localStorage.getItem('useToken');
-  const history = useHistory();
 
   const addNewNaver = (values, actions) => {
     api
@@ -33,17 +33,12 @@ const New = () => {
       .then((response) => {
         console.log(response);
         setIsOpenModalCreate(true);
-        // history.push('/home');
       })
       .catch((errors) => {
         console.log(errors);
         actions.resetForm();
       });
   };
-
-  // const openModal = () => {
-  //   setIsOpenModalCreate(true);
-  // };
 
   return (
     <div>
@@ -58,6 +53,7 @@ const New = () => {
           </div>
 
           <Formik
+            validationSchema={schemaNewNaver}
             className="formik__new__naver"
             onSubmit={addNewNaver}
             initialValues={{
@@ -80,6 +76,7 @@ const New = () => {
                       placeholder="Nome"
                       className="input__add"
                     />
+                    <ErrorMessage name="nameNaver" />
                   </div>
                   <div className="fields">
                     <label>Data de Nascimento</label>
@@ -89,6 +86,7 @@ const New = () => {
                       placeholder="Idade"
                       className="input__add"
                     />
+                    <ErrorMessage name="age" />
                   </div>
                   <div className="fields">
                     <label>Projetos que participou</label>
@@ -98,6 +96,7 @@ const New = () => {
                       placeholder="Projetos que participou"
                       className="input__add"
                     />
+                    <ErrorMessage name="projects" />
                   </div>
                 </div>
                 <div className="col">
@@ -109,6 +108,7 @@ const New = () => {
                       placeholder="Cargo"
                       className="input__add"
                     />
+                    <ErrorMessage name="projects" />
                   </div>
                   <div className="fields">
                     <label>Data de Admissão</label>
@@ -118,6 +118,7 @@ const New = () => {
                       placeholder="Tempo de Empresa"
                       className="input__add"
                     />
+                    <ErrorMessage name="companyTime" />
                   </div>
                   <div className="fields">
                     <label>URL da foto do Naver</label>
@@ -127,6 +128,7 @@ const New = () => {
                       placeholder="URL da foto do Naver"
                       className="input__add"
                     />
+                    <ErrorMessage name="path" />
                   </div>
 
                   <div className="btn__box">

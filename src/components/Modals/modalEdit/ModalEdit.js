@@ -27,12 +27,8 @@ const ModalEdit = () => {
   };
 
   return (
-    <div>
-      <Modal
-        isOpen={isModalOpen}
-        style={customStyles}
-        className="modal_default"
-      >
+    <div className="modal_default">
+      <Modal isOpen={isModalOpen} style={customStyles}>
         <div className="container__modalCreate">
           <div className="line1__modalCreate">
             <h1>Naver Atualizado</h1>

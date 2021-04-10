@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import './modalNaver.css';
 import { FaTrash, FaPen } from 'react-icons/fa';
-import { Link, useHistory } from 'react-router-dom';
-import api from '../../../services/Api';
+import { Link } from 'react-router-dom';
+
 import ModalDelete from '../modalDelete/ModalDelete';
 
 const customStyles = {
@@ -12,11 +12,8 @@ const customStyles = {
     left: '15%',
     right: 'auto',
     bottom: 'auto',
-    // marginRight: '-50%',
-    // marginBottom: '-50%',
-    // transform: 'translate(-50%, -50%)',
-    width: '70%',
-    height: '70%',
+    width: '1200px',
+    height: '60%',
   },
 };
 
@@ -26,10 +23,6 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
   const [editUser, setEditUser] = useState(selectedNaver);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isOpenModalNaver, setIsOpenModalNaver] = useState(true);
-  // let birth = editUser.birthdate;
-  // let currentDate = new Date();
-  // let currentDateYear = currentDate.getFullYear();
-  // let age = currentDateYear - birth.getFullYear();
 
   const token = localStorage.getItem('useToken');
 
@@ -54,7 +47,6 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
   }
 
   const handleKeyDown = (event) => {
-    // console.log(event);
     if (event.key === 'Escape') {
       onClose(null);
     }
@@ -80,28 +72,9 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
     }
   }
 
-  // async function deleteNaver(id) {
-  //   try {
-  //     console.log(id);
-  //     await api.delete(`navers/${id}`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     onClose(null);
-  //   } catch (err) {
-  //     console.log(err);
-  //     alert('Erro ao deletar o Naver, tente novamente');
-  //   }
-  // }
-
   return (
-    <div>
-      <Modal
-        isOpen={isOpenModalNaver}
-        style={customStyles}
-        className="modalNaver__"
-      >
+    <div className="modalNaver__">
+      <Modal isOpen={isOpenModalNaver} style={customStyles}>
         <div className="container__modal_naver">
           <div className="col1_modal">
             <img

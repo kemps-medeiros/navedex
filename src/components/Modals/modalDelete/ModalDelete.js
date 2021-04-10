@@ -52,12 +52,8 @@ const ModalDelete = ({ id }) => {
   }
 
   return (
-    <div>
-      <Modal
-        isOpen={isOpenModal}
-        style={customStyles}
-        className="modal_default"
-      >
+    <div className="modal_default">
+      <Modal isOpen={isOpenModal} style={customStyles}>
         <div className="container__modalDelete">
           <div className="title__modalDelete">
             <h1>Excluir Naver</h1>

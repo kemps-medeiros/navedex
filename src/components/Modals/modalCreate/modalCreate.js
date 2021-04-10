@@ -9,9 +9,6 @@ const customStyles = {
     left: '35%',
     right: 'auto',
     bottom: 'auto',
-    // marginRight: '-50%',
-    // marginBottom: '-50%',
-    // transform: 'translate(-50%, -50%)',
     width: '30%',
     height: '15%',
   },
@@ -27,12 +24,8 @@ const ModalCreate = () => {
   };
 
   return (
-    <div>
-      <Modal
-        isOpen={isModalOpen}
-        style={customStyles}
-        className="modal_default"
-      >
+    <div className="modal_default_create">
+      <Modal isOpen={isModalOpen} style={customStyles}>
         <div className="container__modalCreate">
           <div className="line1__modalCreate">
             <h1>Naver Criado</h1>

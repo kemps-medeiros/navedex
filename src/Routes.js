@@ -1,12 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Redirect,
-  HashRouter,
-  Router,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import StoreProvider from './components/Store/Provider';
 import StoreContext from './components/Store/Context';
 

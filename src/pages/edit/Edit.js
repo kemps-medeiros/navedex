@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import { FaChevronLeft } from 'react-icons/fa';
 import './new.css';
@@ -7,7 +7,6 @@ import api from '../../services/Api';
 import ModalEdit from '../../components/Modals/modalEdit/ModalEdit';
 
 const Edit = () => {
-  // const [id, setId] = useState({});
   const [naverData, setNaverData] = useState({});
   const [name, setName] = useState('');
   const [project, setProject] = useState('');
@@ -19,7 +18,6 @@ const Edit = () => {
   const objectId = useParams();
   let id = objectId.id;
   const token = localStorage.getItem('useToken');
-  const history = useHistory();
 
   async function getNaverData() {
     try {
@@ -40,7 +38,6 @@ const Edit = () => {
             // setBirthdate(response.data.birthdate);
             setUrl(response.data.url);
             formatAdmissionDate(response.data.admission_date);
-            console.log(name);
           }
         });
     } catch (err) {
@@ -97,6 +94,10 @@ const Edit = () => {
     setAdmissionDate(formatNewDate);
   }
 
+  const onSubmitForm = (data) => {
+    console.log(data);
+  };
+
   return (
     <div>
       <Navbar />
@@ -122,6 +123,7 @@ const Edit = () => {
                   className="input__add"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  // {...register('nameNaver')}
                 />
               </div>
               <div className="fields">
@@ -133,6 +135,7 @@ const Edit = () => {
                   className="input__add"
                   value={birthdate}
                   onChange={(e) => setBirthdate(e.target.value)}
+                  // {...register('age')}
                 />
               </div>
               <div className="fields">
@@ -144,6 +147,7 @@ const Edit = () => {
                   className="input__add"
                   value={project}
                   onChange={(e) => setProject(e.target.value)}
+                  // {...register('projects')}
                 />
               </div>
             </div>
@@ -157,6 +161,7 @@ const Edit = () => {
                   className="input__add"
                   value={jobRole}
                   onChange={(e) => setJobRole(e.target.value)}
+                  // {...register('title')}
                 />
               </div>
               <div className="fields">
@@ -168,6 +173,7 @@ const Edit = () => {
                   className="input__add"
                   value={admissionDate}
                   onChange={(e) => setAdmissionDate(e.target.value)}
+                  // {...register('companyTime')}
                 />
               </div>
               <div className="fields">
@@ -179,6 +185,7 @@ const Edit = () => {
                   className="input__add"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
+                  // {...register('path')}
                 />
               </div>
 

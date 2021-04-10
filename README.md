@@ -3,7 +3,6 @@
 
 O desafio consiste em uma web app para gerenciamento dos navers, possuindo informações como: nomes, idades, cargos, tempo de empresa e projetos que participou.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Para executar o Navedex
 

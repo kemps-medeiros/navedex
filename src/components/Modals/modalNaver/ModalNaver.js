@@ -97,7 +97,11 @@ const ModalNaver = ({ onClose, selectedNaver }) => {
 
   return (
     <div>
-      <Modal isOpen={isOpenModalNaver} style={customStyles}>
+      <Modal
+        isOpen={isOpenModalNaver}
+        style={customStyles}
+        className="modalNaver__"
+      >
         <div className="container__modal_naver">
           <div className="col1_modal">
             <img

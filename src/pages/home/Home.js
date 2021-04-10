@@ -5,12 +5,14 @@ import api from '../../services/Api';
 import { Link } from 'react-router-dom';
 import { FaTrash, FaPen } from 'react-icons/fa';
 import ModalNaver from '../../components/Modals/modalNaver/ModalNaver';
+import ModalDelete from '../../components/Modals/modalDelete/ModalDelete';
 
 const Home = () => {
   const [navers, setNavers] = useState([]);
   const [selectedNaver, setSelectedNaver] = useState([]);
-
+  const [idNaver, setIdNaver] = useState('');
   const [isModalNaverOpen, setIsModalNaverOpen] = useState(false);
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
   const token = localStorage.getItem('useToken');
 
@@ -29,7 +31,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchData();
-  }, [token]);
+  }, [token, isModalDeleteOpen]);
 
   async function deleteNaver(id) {
     try {
@@ -61,7 +63,7 @@ const Home = () => {
         .then((response) => {
           setSelectedNaver(response.data);
         });
-      console.log(selectedNaver);
+
       fetchData();
       setIsModalNaverOpen(true);
     } catch (err) {
@@ -72,6 +74,12 @@ const Home = () => {
 
   const handleClose = () => {
     setIsModalNaverOpen(false);
+    fetchData();
+  };
+
+  const modalDeleteOpen = (id) => {
+    setIdNaver(id);
+    setIsModalDeleteOpen(true);
     fetchData();
   };
 
@@ -88,6 +96,7 @@ const Home = () => {
         <div className="navers">
           <div className="row__cards">
             {navers.map(({ id, url, name, job_role }) => {
+              // setId(id);
               return (
                 <div key={id} className="card" id={id}>
                   <img
@@ -102,7 +111,8 @@ const Home = () => {
                     <h4>{job_role}</h4>
                   </div>
                   <div className="handles">
-                    <a className="icons" onClick={() => deleteNaver(id)}>
+                    {/* <a className="icons" onClick={() => deleteNaver(id)}> */}
+                    <a className="icons" onClick={() => modalDeleteOpen(id)}>
                       <FaTrash id={id} />
                     </a>
                     <Link to={`edit/${id}`} className="icons">
@@ -118,6 +128,7 @@ const Home = () => {
       {isModalNaverOpen && (
         <ModalNaver onClose={handleClose} selectedNaver={selectedNaver} />
       )}
+      {isModalDeleteOpen && <ModalDelete id={idNaver} />}
     </div>
   );
 };

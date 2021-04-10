@@ -80,3 +80,34 @@
   cursor: pointer;
   border-radius: none;
 }
+
+.btn__login:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 765px) {
+  .login__box {
+    width: 90%;
+  }
+
+  .email {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn__login {
+    width: 90%;
+  }
+
+  .input {
+    width: 90%;
+  }
+
+  .password {
+    width: 100%;
+  }
+
+  .formik__form {
+    text-align: center;
+  }
+}

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import { FaChevronLeft } from 'react-icons/fa';
 import './new.css';
 import { Formik, Field, Form } from 'formik';
 import api from '../../services/Api';
+import ModalCreate from '../../components/Modals/modalCreate/ModalCreate';
 
 const New = () => {
+  const [isOpenModalCreate, setIsOpenModalCreate] = useState(false);
   const token = localStorage.getItem('useToken');
   const history = useHistory();
 
@@ -30,14 +32,18 @@ const New = () => {
       )
       .then((response) => {
         console.log(response);
-
-        history.push('/home');
+        setIsOpenModalCreate(true);
+        // history.push('/home');
       })
       .catch((errors) => {
         console.log(errors);
         actions.resetForm();
       });
   };
+
+  // const openModal = () => {
+  //   setIsOpenModalCreate(true);
+  // };
 
   return (
     <div>
@@ -136,6 +142,7 @@ const New = () => {
           />
         </div>
       </div>
+      {isOpenModalCreate && <ModalCreate />}
     </div>
   );
 };

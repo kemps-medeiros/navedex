@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import './modalDelete.css';
 import api from '../../../services/Api';
+import { useHistory } from 'react-router-dom';
+import ModalDeleteSucess from '../modalDeleteSucess/ModalDeleteSucess';
 
 const customStyles = {
   content: {
@@ -21,7 +23,9 @@ Modal.setAppElement('#root');
 
 const ModalDelete = ({ id }) => {
   const [isOpenModal, setIsOpenModal] = useState(true);
+  const [isOpenModalDeleteSucess, setIsOpenModalDeleteSucess] = useState(false);
   const [isId, setIsId] = useState(id);
+  const history = useHistory();
   const token = localStorage.getItem('useToken');
 
   const closeModal = () => {
@@ -39,6 +43,8 @@ const ModalDelete = ({ id }) => {
       });
 
       setIsOpenModal(false);
+      setIsOpenModalDeleteSucess(true);
+      history.push('/home');
     } catch (err) {
       console.log(err);
       alert('Erro ao deletar o Naver, tente novamente');
@@ -47,7 +53,11 @@ const ModalDelete = ({ id }) => {
 
   return (
     <div>
-      <Modal isOpen={isOpenModal} style={customStyles}>
+      <Modal
+        isOpen={isOpenModal}
+        style={customStyles}
+        className="modal_default"
+      >
         <div className="container__modalDelete">
           <div className="title__modalDelete">
             <h1>Excluir Naver</h1>
@@ -65,6 +75,7 @@ const ModalDelete = ({ id }) => {
           </div>
         </div>
       </Modal>
+      {isOpenModalDeleteSucess && <ModalDeleteSucess />}
     </div>
   );
 };

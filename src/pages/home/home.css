@@ -81,3 +81,13 @@
   color: inherit;
   cursor: pointer;
 }
+
+@media (max-width: 765px) {
+  .row__cards {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+  }
+}

@@ -82,3 +82,21 @@
   cursor: pointer;
   border-radius: none;
 }
+
+@media (max-width: 765px) {
+  .form__box {
+    width: 100%;
+  }
+
+  .col {
+    width: 100%;
+  }
+
+  .formik__new__naver {
+    flex-direction: column;
+  }
+
+  .form__add {
+    flex-direction: column;
+  }
+}

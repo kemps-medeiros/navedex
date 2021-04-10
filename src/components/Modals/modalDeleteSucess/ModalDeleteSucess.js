@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import './modalCreate.css';
+import './modalDeleteSucess.css';
 import { useHistory } from 'react-router-dom';
 
 const customStyles = {
@@ -19,11 +19,12 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-const ModalCreate = () => {
+const ModalDeleteSucess = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const history = useHistory();
   const closeModalCreate = () => {
     history.push('/home');
+    setIsModalOpen(false);
   };
 
   return (
@@ -35,16 +36,16 @@ const ModalCreate = () => {
       >
         <div className="container__modalCreate">
           <div className="line1__modalCreate">
-            <h1>Naver Criado</h1>
+            <h1>Naver Excluído</h1>
             <a className="close__modalCreate" onClick={closeModalCreate}>
               X
             </a>
           </div>
-          <div className="text__modalCreate">Naver criado com sucesso!</div>
+          <div className="text__modalCreate">Naver excluído com sucesso!</div>
         </div>
       </Modal>
     </div>
   );
 };
 
-export default ModalCreate;
+export default ModalDeleteSucess;

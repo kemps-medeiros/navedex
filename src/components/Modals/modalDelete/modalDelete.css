@@ -32,3 +32,23 @@
   font-weight: 500;
   margin-right: 15px;
 }
+
+@media (max-width: 765px) {
+  .btns__modalDelete {
+    /* display: inline-block; */
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .container__modalDelete {
+    flex-direction: column;
+  }
+
+  .btn_cancel {
+    padding: 5px 5px;
+  }
+
+  .btn_delete {
+    padding: 5px;
+  }
+}

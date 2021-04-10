@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import { FaChevronLeft } from 'react-icons/fa';
 import './new.css';
 import api from '../../services/Api';
+import ModalEdit from '../../components/Modals/modalEdit/ModalEdit';
 
 const Edit = () => {
   // const [id, setId] = useState({});
@@ -14,6 +15,7 @@ const Edit = () => {
   const [admissionDate, setAdmissionDate] = useState('');
   const [url, setUrl] = useState('');
   const [birthdate, setBirthdate] = useState('');
+  const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
   const objectId = useParams();
   let id = objectId.id;
   const token = localStorage.getItem('useToken');
@@ -34,9 +36,10 @@ const Edit = () => {
             setName(response.data.name);
             setProject(response.data.project);
             setJobRole(response.data.job_role);
-            setBirthdate(response.data.birthdate);
+            formatBirthate(response.data.birthdate);
+            // setBirthdate(response.data.birthdate);
             setUrl(response.data.url);
-            setAdmissionDate(response.data.admission_date);
+            formatAdmissionDate(response.data.admission_date);
             console.log(name);
           }
         });
@@ -75,14 +78,24 @@ const Edit = () => {
       )
       .then((response) => {
         console.log(response);
-
-        history.push('/home');
+        setIsOpenModalEdit(true);
+        // history.push('/home');
       })
       .catch((errors) => {
         console.log(errors);
-        // actions.resetForm();
       });
   };
+
+  function formatBirthate(date) {
+    let newDate = new Date(date);
+    let formatNewDate = new Intl.DateTimeFormat('nl-BE').format(newDate);
+    setBirthdate(formatNewDate);
+  }
+  function formatAdmissionDate(date) {
+    let newDate = new Date(date);
+    let formatNewDate = new Intl.DateTimeFormat('nl-BE').format(newDate);
+    setAdmissionDate(formatNewDate);
+  }
 
   return (
     <div>
@@ -180,6 +193,7 @@ const Edit = () => {
           </form>
         </div>
       </div>
+      {isOpenModalEdit && <ModalEdit />}
     </div>
   );
 };

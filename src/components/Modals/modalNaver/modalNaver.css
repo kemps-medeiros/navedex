@@ -73,3 +73,40 @@
   color: inherit;
   margin-right: 30px;
 }
+
+@media (max-width: 765px) {
+  .modalNaver__ {
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+  }
+
+  .container__modal_naver {
+    display: inline-block;
+    height: 100%;
+  }
+
+  .img_modal {
+    /* height: 50%; */
+    width: 100%;
+  }
+
+  .col1_modal {
+    width: 100%;
+    height: 100%;
+  }
+
+  .col2_modal {
+    width: 100%;
+  }
+
+  .icons__modalNaver {
+    height: 100%;
+  }
+
+  .container__modal_naver {
+    flex-direction: column;
+    height: 50%;
+    width: 100%;
+  }
+}
